@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FuelSense — Industrial IoT Smart LPG Telemetry &amp; Depletion Alerts</title>
+  <meta name="description" content="Industrial-grade IoT LPG gas cylinder weighing and predictive depletion monitoring for domestic kitchens and commercial manifolds. Sub-gram strain gauge precision with zero downtime."/>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,300;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       SITE HEADER & STICKY NAVIGATION
+       ========================================================================== -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-wrapper">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="logo-brand">
+        <div class="logo-icon-wrap">
+          <span class="material-symbols-outlined" style="font-size: 22px;">sensors</span>
+        </div>
+        <div>
+          <span class="logo-text">FuelSense</span>
+          <span class="logo-badge">IoT</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-links">
+        <a href="#how-it-works" class="active">How It Works</a>
+        <a href="#live-demo">Live Monitor</a>
+        <a href="#commercial">Commercial Scale</a>
+        <a href="#features">Capabilities</a>
+        <a href="#roi-calc">Savings Calculator</a>
+        <a href="#pricing">Hardware Kit</a>
+        <a href="#specs">Specifications</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="nav-actions">
+        <!-- Live Cloud Network Status -->
+        <div class="telemetry-indicator" title="ESP32 Cloud Gateway Operational">
+          <span class="telemetry-dot"></span>
+          <span>CLOUD SYNC: 100%</span>
+        </div>
+
+        <!-- Audio Synthesizer Toggle -->
+        <button class="audio-toggle-btn" id="audioToggle" title="Enable Telemetry Audio Feedback">
+          <span class="material-symbols-outlined" style="font-size: 18px;">volume_off</span>
+        </button>
+
+        <!-- Primary CTA -->
+        <a href="#pricing" class="btn btn-primary btn-sm" data-open-order>
+          <span>Get FuelSense</span>
+          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         SECTION 1: HERO SECTION
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-glow-1"></div>
+      <div class="hero-glow-2"></div>
+      
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Left Column: Copy & Value Proposition -->
+          <div class="hero-copy">
+            <div class="section-tag dark">
+              <span class="telemetry-dot"></span>
+              <span>Next-Gen IoT Gas Telemetry • Load-Cell Precision</span>
+            </div>
+
+            <h1 class="hero-title">
+              Know before <br/>
+              <span>it's gone.</span>
+            </h1>
+
+            <p class="hero-lead">
+              Precision LPG cylinder monitoring and predictive depletion alerts for domestic residences and heavy-duty commercial kitchens. Sub-gram industrial strain telemetry meets complete peace of mind.
+            </p>
+
+            <!-- Hero CTAs -->
+            <div class="hero-cta-group">
+              <a href="#pricing" class="btn btn-primary btn-lg" data-open-order>
+                <span>Order Hardware Kit — ₹2,499</span>
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+              </a>
+              <a href="#live-demo" class="btn btn-secondary btn-lg">
+                <span class="material-symbols-outlined" style="font-size: 20px;">play_circle</span>
+                <span>Try Interactive Console</span>
+              </a>
+            </div>
+
+            <!-- Trust Bar -->
+            <div class="hero-trust-bar">
+              <div class="trust-item">
+                <span class="material-symbols-outlined">verified</span>
+                <span>99.4% Strain Accuracy</span>
+              </div>
+              <div class="trust-item">
+                <span class="material-symbols-outlined">network_check</span>
+                <span>10 Hz Sampling Rate</span>
+              </div>
+              <div class="trust-item">
+                <span class="material-symbols-outlined">wifi</span>
+                <span>Dual-Band Wi-Fi &amp; BLE 5.2</span>
+              </div>
+              <div class="trust-item">
+                <span class="material-symbols-outlined">shield</span>
+                <span>ATEX Zone 2 Safe</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Visual Product Showcase with Live Telemetry HUD -->
+          <div class="hero-visual-wrapper">
+            <div class="hero-product-card">
+              <img src="assets/fuelsense_scale_hero.jpg" alt="FuelSense Smart IoT Scale with Cylinder" class="hero-product-img"/>
+              
+              <!-- Floating Glassmorphic Telemetry HUD -->
+              <div class="hero-floating-hud">
+                <div class="hud-top">
+                  <span class="hud-device-id">
+                    <span class="material-symbols-outlined" style="font-size: 16px; color: var(--primary);">memory</span>
+                    FS-HX711-BLR-089 (Primary)
+                  </span>
+                  <span class="status-badge-chip chip-low" id="heroStatusBadge">
+                    LOW WARNING
+                  </span>
+                </div>
+
+                <div class="hud-metric-row">
+                  <div>
+                    <span class="hud-metric-number" id="heroWeightVal">2.10</span>
+                    <span class="hud-metric-unit">kg net</span>
+                  </div>
+                  <div class="font-mono text-dim" style="font-size: 0.8rem;">
+                    Gross: <strong style="color: #ffffff;">17.40 kg</strong>
+                  </div>
+                </div>
+
+                <!-- Live Track -->
+                <div class="hud-bar-track">
+                  <div class="hud-bar-fill" id="heroProgressBar" style="width: 15%;"></div>
+                </div>
+
+                <div class="hud-footnote">
+                  <span>Burn Rate: 0.35 kg/d</span>
+                  <span class="text-primary-fixed">~6 Days Reserve</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: PROBLEM VS SOLUTION (EMPIRICAL DIFFERENCE)
+         ========================================================================== -->
+    <section class="section" id="problem-solution">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Empirical Control vs. Complete Guesswork</div>
+          <h2 class="section-title">The Cost of Guessing vs. The Power of Sensing</h2>
+          <p class="section-subtitle">
+            Heavy steel cylinders make physical weight estimation impossible. See how digital strain telemetry eliminates unplanned kitchen halts and costly emergency surcharges.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          
+          <!-- Card 1: Without FuelSense -->
+          <div class="compare-card card-negative">
+            <span class="compare-badge badge-negative">Status Quo</span>
+            
+            <div class="compare-header">
+              <div class="compare-icon-box bad">
+                <span class="material-symbols-outlined">close</span>
+              </div>
+              <div>
+                <h3>Without FuelSense</h3>
+                <span class="font-mono text-error" style="font-size: 0.8rem; font-weight: 600;">Unpredictable Depletion</span>
+              </div>
+            </div>
+
+            <div class="compare-steps">
+              <!-- Step 1 -->
+              <div class="step-row">
+                <span class="step-num">1</span>
+                <div class="step-text">
+                  <h4>Cooking in Progress</h4>
+                  <p>Active family dinner preparation or commercial restaurant lunch rush under full burner throttle.</p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="step-row step-bad">
+                <span class="step-num">2</span>
+                <div class="step-text">
+                  <h4 class="text-error">Sudden Flame Extinction</h4>
+                  <p>Pressure collapses without warning mid-recipe. The blue flame dies cold and ovens shut off.</p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="step-row">
+                <span class="step-num">3</span>
+                <div class="step-text">
+                  <h4>Frantic Emergency Downtime</h4>
+                  <p>Shaking heavy cylinders in desperation, paying premium rush fees, and waiting hours for delivery.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="compare-result text-error">
+              <span class="material-symbols-outlined">report_problem</span>
+              <span>Result: Spoiled meals, angry diners, and zero consumption foresight.</span>
+            </div>
+          </div>
+
+          <!-- Card 2: With FuelSense -->
+          <div class="compare-card card-positive">
+            <span class="compare-badge badge-positive">Guaranteed Continuity</span>
+            
+            <div class="compare-header">
+              <div class="compare-icon-box good">
+                <span class="material-symbols-outlined">check</span>
+              </div>
+              <div>
+                <h3>With FuelSense</h3>
+                <span class="font-mono text-primary" style="font-size: 0.8rem; font-weight: 600;">Continuous Dynamic Telemetry</span>
+              </div>
+            </div>
+
+            <div class="compare-steps">
+              <!-- Step 1 -->
+              <div class="step-row step-success">
+                <span class="step-num">1</span>
+                <div class="step-text">
+                  <h4 class="text-primary">Continuous Sub-Gram Metering</h4>
+                  <p>Aviation-grade strain sensors monitor net combustible gas mass at 10 Hz with ±5g resolution.</p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="step-row step-warn">
+                <span class="step-num">2</span>
+                <div class="step-text">
+                  <h4 class="text-tertiary">Early Proactive Warning</h4>
+                  <p>Automated WhatsApp &amp; SMS alerts trigger at 30% reserve (4 to 6 days advance notice).</p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="step-row step-success">
+                <span class="step-num">3</span>
+                <div class="step-text">
+                  <h4 class="text-primary">Timely Refill Handover</h4>
+                  <p>Seamlessly swap cylinders at your convenience before critical reserves are ever exhausted.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="compare-result text-primary">
+              <span class="material-symbols-outlined">verified</span>
+              <span>Result: 100% predictable fuel operations and continuous blue flame.</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: HARDWARE ARCHITECTURE (6-STAGE PIPELINE)
+         ========================================================================== -->
+    <section class="section section-alt" id="how-it-works">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Hardware Architecture</div>
+          <h2 class="section-title">Precision Engineering Behind FuelSense</h2>
+          <p class="section-subtitle">
+            From heavy raw load deflection to actionable kitchen alerts in under 1.2 seconds.
+          </p>
+        </div>
+
+        <!-- 6-Stage Pipeline Interactive Cards -->
+        <div class="arch-grid">
+          
+          <div class="arch-card active" data-arch-step="1">
+            <div class="arch-top">
+              <span class="arch-step-num">01</span>
+              <span class="material-symbols-outlined arch-icon">propane_tank</span>
+            </div>
+            <div class="arch-content">
+              <h3>LPG Vessel</h3>
+              <p>Heavy steel cylinder resting on the reinforced chassis base.</p>
+            </div>
+            <span class="arch-tag">Vessel Mass</span>
+          </div>
+
+          <div class="arch-card" data-arch-step="2">
+            <div class="arch-top">
+              <span class="arch-step-num">02</span>
+              <span class="material-symbols-outlined arch-icon">balance</span>
+            </div>
+            <div class="arch-content">
+              <h3>100kg Load Cell</h3>
+              <p>Shear beam Wheatstone strain gauge translates deflection to micro-volts.</p>
+            </div>
+            <span class="arch-tag">Strain Gauge</span>
+          </div>
+
+          <div class="arch-card" data-arch-step="3">
+            <div class="arch-top">
+              <span class="arch-step-num">03</span>
+              <span class="material-symbols-outlined arch-icon">developer_board</span>
+            </div>
+            <div class="arch-content">
+              <h3>HX711 ADC</h3>
+              <p>24-bit precision analog converter with programmable gain amplification.</p>
+            </div>
+            <span class="arch-tag">24-Bit ADC</span>
+          </div>
+
+          <div class="arch-card" data-arch-step="4">
+            <div class="arch-top">
+              <span class="arch-step-num">04</span>
+              <span class="material-symbols-outlined arch-icon">memory</span>
+            </div>
+            <div class="arch-content">
+              <h3>ESP32 SoC</h3>
+              <p>Dual-core processor cleans signals &amp; dispatches encrypted Wi-Fi packets.</p>
+            </div>
+            <span class="arch-tag">FreeRTOS</span>
+          </div>
+
+          <div class="arch-card" data-arch-step="5">
+            <div class="arch-top">
+              <span class="arch-step-num">05</span>
+              <span class="material-symbols-outlined arch-icon">calculate</span>
+            </div>
+            <div class="arch-content">
+              <h3>Tare Algorithm</h3>
+              <p>Calculates net gas mass, filtering out thermal drift and mechanical shocks.</p>
+            </div>
+            <span class="arch-tag">Dynamic Alg</span>
+          </div>
+
+          <div class="arch-card" data-arch-step="6">
+            <div class="arch-top">
+              <span class="arch-step-num">06</span>
+              <span class="material-symbols-outlined arch-icon">notifications_active</span>
+            </div>
+            <div class="arch-content">
+              <h3>Alert Engine</h3>
+              <p>OLED display output + automated WhatsApp Business &amp; SMS alerts.</p>
+            </div>
+            <span class="arch-tag">Omnichannel</span>
+          </div>
+
+        </div>
+
+        <!-- Formula Callout Box -->
+        <div class="formula-box">
+          <div>
+            <div class="section-tag" style="margin-bottom: 0.5rem;">Calibration Formula</div>
+            <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">The Telemetry Equation</h3>
+            <p id="archDetailsBox" style="font-size: 0.85rem; color: var(--on-surface-variant); line-height: 1.6;">
+              Every gas cylinder is stamped with its certified metallic tare weight. FuelSense dynamically isolates metallic density to yield 100% pure net combustible gas measurement.
+            </p>
+          </div>
+
+          <div class="formula-display-dark">
+            <div class="equation-flow">
+              <span class="eq-pill eq-net">Net Gas (W_net)</span>
+              <span class="eq-operator">=</span>
+              <span class="eq-pill eq-gross">Total Gross Weight (W_gross)</span>
+              <span class="eq-operator">−</span>
+              <span class="eq-pill eq-tare" id="eqTareVal">Tare Weight (15.3 kg)</span>
+            </div>
+
+            <div class="formula-specs">
+              <span>Standard Domestic: 14.2 kg net fuel</span>
+              <span>Commercial Jumbo: 19.0 kg / 47.5 kg</span>
+              <span class="text-primary-fixed">Sampling: 10 Hz continuous</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: LIVE INTERACTIVE TELEMETRY CONSOLE (STAR FEATURE)
+         ========================================================================== -->
+    <section class="section demo-section" id="live-demo">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">
+            <span class="telemetry-dot"></span>
+            <span>Real-Time Simulated IoT Console</span>
+          </div>
+          <h2 class="section-title">Interactive Live Monitor</h2>
+          <p class="section-subtitle">
+            Simulate cylinder consumption, observe volumetric liquid levels and burner flame intensity, inspect real-time alarms, and test the machine-learning depletion run-out model.
+          </p>
+        </div>
+
+        <div class="demo-grid">
+          
+          <!-- Left: Main Interactive Telemetry Console -->
+          <div class="demo-console">
+            
+            <!-- Top Bar -->
+            <div class="console-top">
+              <div class="console-device">
+                <div class="console-device-icon">
+                  <span class="material-symbols-outlined" style="font-size: 26px;">sensors</span>
+                </div>
+                <div>
+                  <h3 style="font-size: 1.15rem;">Cylinder 01 — Kitchen Primary</h3>
+                  <span class="font-mono text-muted" style="font-size: 0.75rem;">UUID: FS-HX711-BLR-089 • Dual Wi-Fi/BLE</span>
+                </div>
+              </div>
+
+              <div class="console-badges">
+                <span class="status-badge-chip chip-normal">
+                  <span class="telemetry-dot"></span>
+                  Online • 2s ago
+                </span>
+                <span class="status-badge-chip chip-low" id="demoStatusBadge">
+                  LOW WARNING
+                </span>
+              </div>
+            </div>
+
+            <!-- Stage: Volumetric SVG Cylinder + Live Burner Flame + Primary Metrics -->
+            <div class="telemetry-stage">
+              
+              <!-- Custom Volumetric Cylinder SVG -->
+              <div class="cylinder-visualizer-container">
+                <!-- Virtual Burner Flame -->
+                <div class="flame-simulation" id="flameSimulation">
+                  <div class="flame-particle"></div>
+                </div>
+
+                <svg class="cylinder-svg" viewBox="0 0 140 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <!-- LPG Normal Emerald/Teal Gradient -->
+                    <linearGradient id="lpgNormalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#13ab9e" stop-opacity="0.9"/>
+                      <stop offset="100%" stop-color="#006a62" stop-opacity="0.95"/>
+                    </linearGradient>
+                    <!-- LPG Warning Amber Gradient -->
+                    <linearGradient id="lpgWarningGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ffb627" stop-opacity="0.9"/>
+                      <stop offset="100%" stop-color="#cb8d00" stop-opacity="0.95"/>
+                    </linearGradient>
+                    <!-- LPG Critical Red Gradient -->
+                    <linearGradient id="lpgCriticalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ba1a1a" stop-opacity="0.9"/>
+                      <stop offset="100%" stop-color="#7a0d0d" stop-opacity="0.95"/>
+                    </linearGradient>
+                    <linearGradient id="tankCasingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#1b4955"/>
+                      <stop offset="50%" stop-color="#2c6978"/>
+                      <stop offset="100%" stop-color="#143e49"/>
+                    </linearGradient>
+                  </defs>
+
+                  <!-- Weighing Base Pad -->
+                  <rect x="15" y="195" width="110" height="15" rx="6" fill="#0B2F3A" stroke="#13ab9e" stroke-width="2"/>
+                  <circle cx="28" cy="202" r="3" fill="#13ab9e"/>
+                  <text x="70" y="206" fill="#7af7e8" font-family="JetBrains Mono" font-size="8" text-anchor="middle">FS-LOAD CELL</text>
+
+                  <!-- Outer Cylinder Body -->
+                  <rect x="25" y="45" width="90" height="145" rx="16" fill="url(#tankCasingGrad)" stroke="#5bdacc" stroke-opacity="0.3" stroke-width="1.5"/>
+                  
+                  <!-- Top Collar / Handle Ring -->
+                  <path d="M 45 45 L 45 25 C 45 15 95 15 95 25 L 95 45 Z" fill="none" stroke="#2c6978" stroke-width="4"/>
+                  <!-- Center Valve -->
+                  <rect x="63" y="18" width="14" height="14" rx="2" fill="#ffd700"/>
+                  <line x1="70" y1="18" x2="70" y2="10" stroke="#ffd700" stroke-width="3"/>
+
+                  <!-- Dynamic Liquefied Gas Fill Wave -->
+                  <clipPath id="cylinderClip">
+                    <rect x="27" y="48" width="86" height="138" rx="12"/>
+                  </clipPath>
+                  
+                  <g clip-path="url(#cylinderClip)">
+                    <!-- Background empty cylinder interior -->
+                    <rect x="25" y="45" width="90" height="145" fill="#072028"/>
+                    
+                    <!-- Liquid level rectangle (manipulated by JS) -->
+                    <rect id="cylinderLiquidLevel" x="25" y="152" width="90" height="18" fill="url(#lpgWarningGrad)"/>
+                    
+                    <!-- Meniscus Wave Line -->
+                    <path d="M 25 0 Q 45 -4 70 0 T 115 0" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none"/>
+                  </g>
+
+                  <!-- Stamped Cylinder Specs text -->
+                  <text x="70" y="75" fill="rgba(255,255,255,0.5)" font-family="JetBrains Mono" font-size="8" text-anchor="middle">LPG 14.2 KG</text>
+                  <text x="70" y="90" fill="rgba(255,255,255,0.3)" font-family="JetBrains Mono" font-size="7" text-anchor="middle">TARE: 15.3 KG</text>
+                </svg>
+              </div>
+
+              <!-- Center Numerical Gauges -->
+              <div class="telemetry-metrics-main">
+                <div class="weight-callout">
+                  <span class="label">Remaining Combustible Net LPG</span>
+                  <div class="weight-big">
+                    <span id="demoWeightDisplay">2.1</span>
+                    <span>kg</span>
+                  </div>
+                  <span class="font-mono text-muted" style="font-size: 0.8rem; margin-top: 0.25rem;">
+                    Net Capacity: 14.2 kg • Gross Total: <strong id="stageGrossWeightVal">17.4 kg</strong>
+                  </span>
+                </div>
+
+                <!-- Horizontal Fill Bar with Reference Markers -->
+                <div class="fill-ratio-wrap">
+                  <div class="fill-ratio-header">
+                    <span>Volumetric Fill Ratio</span>
+                    <span id="demoPercentageDisplay" class="text-tertiary">15%</span>
+                  </div>
+
+                  <div class="progress-track-custom">
+                    <div class="progress-fill-custom" id="demoProgressBar"></div>
+                    <!-- 20% Threshold Marker -->
+                    <div class="threshold-marker-line" id="thresholdMarker" style="left: 20%;" title="Configured Alert Threshold"></div>
+                    <!-- 8% Critical Marker -->
+                    <div class="threshold-marker-critical" style="left: 8%;" title="Critical Reserve"></div>
+                  </div>
+
+                  <div class="progress-ticks">
+                    <span>0 kg (Empty)</span>
+                    <span>Threshold Line</span>
+                    <span>14.2 kg (Full)</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Hardware Controls Panel -->
+            <div class="controls-panel">
+              <div class="controls-header">
+                <span class="controls-title">Simulate Real Gas Consumption</span>
+                <button class="btn btn-outline btn-sm" id="resetDemoBtn">
+                  <span class="material-symbols-outlined" style="font-size: 16px;">restart_alt</span>
+                  <span>Reset Default (2.1 kg)</span>
+                </button>
+              </div>
+
+              <!-- Main Slider -->
+              <div class="slider-group">
+                <div class="slider-label-row">
+                  <label for="weightSlider">Adjust Remaining LPG Mass:</label>
+                  <span class="font-mono text-primary font-bold"><span id="sliderValue">2.1</span> kg</span>
+                </div>
+                <input type="range" class="sim-slider" id="weightSlider" min="0.2" max="14.2" step="0.1" value="2.1"/>
+              </div>
+
+              <!-- Quick Presets -->
+              <div class="presets-group">
+                <button class="preset-btn" data-preset="14.2">Full Tank (14.2 kg)</button>
+                <button class="preset-btn" data-preset="7.5">Mid-Cycle (7.5 kg)</button>
+                <button class="preset-btn active" data-preset="2.1">Warning (2.1 kg)</button>
+                <button class="preset-btn" data-preset="0.6">Emergency Reserve (0.6 kg)</button>
+                <button class="btn btn-primary btn-sm" id="autoBurnBtn" style="margin-left: auto;">
+                  <span class="material-symbols-outlined" style="font-size: 16px;">local_fire_department</span>
+                  <span>Simulate Cooking Burn</span>
+                </button>
+              </div>
+
+              <!-- Parameters Customization Row -->
+              <div class="inputs-row">
+                <div class="input-field-group">
+                  <label for="thresholdSelect">Warning Trigger Threshold:</label>
+                  <select class="select-custom" id="thresholdSelect">
+                    <option value="30">Early Warning: Below 30% (~4.2 kg)</option>
+                    <option value="20" selected>Standard Kitchen: Below 20% (~2.8 kg)</option>
+                    <option value="10">Aggressive Reserve: Below 10% (~1.4 kg)</option>
+                  </select>
+                </div>
+
+                <div class="input-field-group">
+                  <label for="tareSelect">Vessel Tare Calibration:</label>
+                  <select class="select-custom" id="tareSelect">
+                    <option value="15.3" selected>Standard Indane/HP Tare (15.3 kg)</option>
+                    <option value="15.8">Bharat Gas Tare (15.8 kg)</option>
+                    <option value="21.5">Commercial 19kg Tare (21.5 kg)</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Stats Quad Grid -->
+            <div class="telemetry-quad">
+              <div class="quad-item">
+                <div class="quad-label">Gross Total Mass</div>
+                <div class="quad-value" id="grossWeightVal">17.4 kg</div>
+              </div>
+              <div class="quad-item">
+                <div class="quad-label">Calibrated Tare</div>
+                <div class="quad-value">15.3 kg</div>
+              </div>
+              <div class="quad-item">
+                <div class="quad-label">Daily Burn Rate</div>
+                <div class="quad-value">0.35 kg/d</div>
+              </div>
+              <div class="quad-item">
+                <div class="quad-label">ADC Noise Floor</div>
+                <div class="quad-value text-primary">0.02%</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Sidebar: Live Alert Notification Mockup & ML Prediction Engine -->
+          <div class="demo-sidebar">
+            
+            <!-- Real-Time Alert Mockup Card -->
+            <div class="alert-mockup-card" id="alertCard">
+              <div class="alert-top">
+                <div class="alert-icon-box">
+                  <span class="material-symbols-outlined" style="font-size: 24px;">warning</span>
+                </div>
+                <div>
+                  <h4 id="alertCardTitle" style="font-size: 1.05rem;">FuelSense Alert: LPG Below 20%</h4>
+                  <span class="font-mono text-muted" style="font-size: 0.75rem;">Automated Multi-Channel Dispatch</span>
+                </div>
+              </div>
+
+              <p class="alert-body-text" id="alertCardBody">
+                Arrange replacement soon to prevent cooking halts. Sent to <strong>+91 98*** 12345</strong> via SMS &amp; WhatsApp Business.
+              </p>
+
+              <div class="alert-meta">
+                <span>Channel: WhatsApp Business API</span>
+                <span class="text-tertiary font-bold">Active Alarm</span>
+              </div>
+            </div>
+
+            <!-- ML Predictive Run-out Engine -->
+            <div class="ml-prediction-card">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div class="compare-icon-box good" style="width: 40px; height: 40px;">
+                  <span class="material-symbols-outlined" style="font-size: 22px;">event_repeat</span>
+                </div>
+                <div>
+                  <h4 style="font-size: 1.05rem;">Predictive Depletion Engine</h4>
+                  <span class="font-mono text-primary" style="font-size: 0.75rem;">Linear Regression Run-Out Model</span>
+                </div>
+              </div>
+
+              <div class="ml-days-box">
+                <div>
+                  <div class="font-mono text-muted" style="font-size: 0.75rem;">Estimated Cooking Time:</div>
+                  <div class="ml-days-big" id="daysRemainingVal">6 Days</div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="font-mono text-muted" style="font-size: 0.75rem;">Family Meals Left:</div>
+                  <div class="font-mono text-primary font-bold" id="mealsRemainingVal" style="font-size: 1.25rem;">18 Meals</div>
+                </div>
+              </div>
+
+              <p style="font-size: 0.85rem; color: var(--on-surface-variant); line-height: 1.5;">
+                Recommended reorder window: <strong>within 2–4 days</strong> to ensure zero burner disruption.
+              </p>
+
+              <button class="btn btn-outline" style="width: 100%;" data-open-order>
+                <span class="material-symbols-outlined" style="font-size: 18px;">local_shipping</span>
+                <span>One-Click Refill Order</span>
+              </button>
+            </div>
+
+            <!-- Hardware Diagnostic Tile -->
+            <div class="diag-card">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="font-mono text-primary-fixed" style="font-size: 0.75rem; font-weight: 700;">HARDWARE HEALTH TELEMETRY</span>
+                <span class="status-badge-chip chip-normal" style="font-size: 0.65rem;">OPTIMAL</span>
+              </div>
+
+              <div class="diag-row">
+                <span>BLE 5.2 Signal Strength:</span>
+                <span class="text-primary-fixed">-54 dBm (Excellent)</span>
+              </div>
+              <div class="diag-row">
+                <span>HX711 Bridge Drift:</span>
+                <span>± 0.003%</span>
+              </div>
+              <div class="diag-row">
+                <span>Backup LiFePO4 Pack:</span>
+                <span>94% (14 months remaining)</span>
+              </div>
+              <div class="diag-row">
+                <span>Line Temperature:</span>
+                <span>28.4 °C (Normal)</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: ENTERPRISE & MULTI-CYLINDER MANIFOLD MANAGEMENT
+         ========================================================================== -->
+    <section class="section" id="commercial">
+      <div class="container">
+        
+        <div class="manifold-toolbar">
+          <div>
+            <div class="section-tag">Commercial Scale</div>
+            <h2 class="section-title" style="margin-bottom: 0.5rem;">Enterprise &amp; Multi-Cylinder Manifold Management</h2>
+            <p class="section-subtitle" style="margin-bottom: 0;">
+              Built for commercial restaurants, hotel kitchens, industrial bakeries, and cloud kitchens managing multi-cylinder bank manifolds.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="btn btn-outline" id="switchManifoldBtn">
+              <span class="material-symbols-outlined" style="font-size: 18px;">alt_route</span>
+              <span>Auto-Switch Manifold Valve</span>
+            </button>
+            <button class="btn btn-primary" id="exportCsvBtn">
+              <span class="material-symbols-outlined" style="font-size: 18px;">download</span>
+              <span>Export Telemetry CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4-Station Bento Grid -->
+        <div class="manifold-grid">
+          
+          <!-- Station A -->
+          <div class="manifold-station-card">
+            <div class="station-header">
+              <div>
+                <span class="station-id">Station A • Manifold 1</span>
+                <h3 class="station-name">Cylinder 01 — Main Stove</h3>
+              </div>
+              <span class="status-badge-chip chip-normal">NORMAL</span>
+            </div>
+
+            <div class="station-level-row">
+              <span class="station-level-val text-success">7.4 kg</span>
+              <span class="station-level-pct">52% Remaining</span>
+            </div>
+
+            <div class="station-progress">
+              <div class="station-progress-bar" style="width: 52%; background-color: var(--success);"></div>
+            </div>
+
+            <div class="station-footer">
+              <span>Estimated Burn:</span>
+              <strong style="color: var(--on-surface);">18 days left</strong>
+            </div>
+          </div>
+
+          <!-- Station B -->
+          <div class="manifold-station-card card-positive" id="stationCardB">
+            <span class="station-badge-top">Auto-Reorder Placed</span>
+            <div class="station-header">
+              <div>
+                <span class="station-id">Station B • Manifold 1</span>
+                <h3 class="station-name">Cylinder 02 — Fryer Unit</h3>
+              </div>
+              <span class="status-badge-chip chip-low">LOW</span>
+            </div>
+
+            <div class="station-level-row">
+              <span class="station-level-val text-tertiary">2.1 kg</span>
+              <span class="station-level-pct">15% Remaining</span>
+            </div>
+
+            <div class="station-progress">
+              <div class="station-progress-bar" style="width: 15%; background-color: var(--tertiary);"></div>
+            </div>
+
+            <div class="station-footer">
+              <span>Refill ETA:</span>
+              <strong style="color: var(--tertiary);">Tomorrow, 10:00 AM</strong>
+            </div>
+          </div>
+
+          <!-- Station C -->
+          <div class="manifold-station-card" id="stationCardC">
+            <div class="station-header">
+              <div>
+                <span class="station-id">Station C • Manifold 2</span>
+                <h3 class="station-name">Cylinder 03 — Backup Bank</h3>
+              </div>
+              <span class="status-badge-chip chip-error">VERY LOW</span>
+            </div>
+
+            <div class="station-level-row">
+              <span class="station-level-val text-error">0.7 kg</span>
+              <span class="station-level-pct">5% Remaining</span>
+            </div>
+
+            <div class="station-progress">
+              <div class="station-progress-bar" style="width: 5%; background-color: var(--error);"></div>
+            </div>
+
+            <div class="station-footer">
+              <span>Action:</span>
+              <strong style="color: var(--error);">Switch Manifold</strong>
+            </div>
+          </div>
+
+          <!-- Station D (Commercial Jumbo) -->
+          <div class="manifold-station-card">
+            <div class="station-header">
+              <div>
+                <span class="station-id">Station D • High-Yield</span>
+                <h3 class="station-name">Cylinder 04 — Steam Boiler</h3>
+              </div>
+              <span class="status-badge-chip chip-normal">FULL</span>
+            </div>
+
+            <div class="station-level-row">
+              <span class="station-level-val text-success">18.2 kg</span>
+              <span class="station-level-pct">96% Remaining</span>
+            </div>
+
+            <div class="station-progress">
+              <div class="station-progress-bar" style="width: 96%; background-color: var(--success);"></div>
+            </div>
+
+            <div class="station-footer">
+              <span>Jumbo 19kg Vessel:</span>
+              <strong style="color: var(--on-surface);">44 days left</strong>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: CORE TELEMETRY CAPABILITIES (FEATURES GRID)
+         ========================================================================== -->
+    <section class="section section-alt" id="features">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Engineered for Harsh Commercial Kitchens</div>
+          <h2 class="section-title">Core Telemetry Capabilities</h2>
+          <p class="section-subtitle">
+            Engineered to industrial instrumentation standards to withstand moisture, high-grease atmospheres, and continuous high-temperature cooking environments.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          
+          <!-- Feature 1 -->
+          <div class="feature-tile">
+            <div class="feature-icon-box">
+              <span class="material-symbols-outlined">monitor_heart</span>
+            </div>
+            <h3>Real-Time Strain Telemetry</h3>
+            <p>
+              Continuous sub-gram strain-gauge mass measurement with an on-device high-contrast OLED display and real-time cloud synchronization over TLS 1.3 encryption.
+            </p>
+            <span class="feature-spec-tag">
+              <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+              ±5 Gram Resolution
+            </span>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-tile">
+            <div class="feature-icon-box">
+              <span class="material-symbols-outlined">notifications_active</span>
+            </div>
+            <h3>Triple-Stage Warning Logic</h3>
+            <p>
+              Never face unexpected flame shutoffs. Configurable multi-stage warning beacons trigger sequentially at 30%, 15%, and 5% reserves with customizable buzzer alerts.
+            </p>
+            <span class="feature-spec-tag">
+              <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+              30% • 15% • 5% Multi-Stage
+            </span>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-tile">
+            <div class="feature-icon-box">
+              <span class="material-symbols-outlined">tune</span>
+            </div>
+            <h3>Universal Cylinder Profiles</h3>
+            <p>
+              Pre-calibrated profiles allow effortless one-tap switching between standard domestic 14.2 kg tanks and commercial 19 kg / 47.5 kg jumbo units with automatic tare compensation.
+            </p>
+            <span class="feature-spec-tag">
+              <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+              Indane • HP • Bharat Gas
+            </span>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="feature-tile">
+            <div class="feature-icon-box">
+              <span class="material-symbols-outlined">forum</span>
+            </div>
+            <h3>Omnichannel Alert Dispatch</h3>
+            <p>
+              Automated notifications sent straight to family WhatsApp groups, commercial kitchen facility managers via SMS, and REST webhook endpoints for smart home hubs.
+            </p>
+            <span class="feature-spec-tag">
+              <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+              WhatsApp Business &amp; SMS
+            </span>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="feature-tile">
+            <div class="feature-icon-box">
+              <span class="material-symbols-outlined">battery_saver</span>
+            </div>
+            <h3>14-Month LiFePO4 Battery</h3>
+            <p>
+              Ultra-low-power FreeRTOS deep-sleep architecture provides up to 14 months of continuous monitoring on internal backup battery, with USB-C mains pass-through.
+            </p>
+            <span class="feature-spec-tag">
+              <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+              Zero Downtime During Power Cuts
+            </span>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="feature-tile">
+            <div class="feature-icon-box">
+              <span class="material-symbols-outlined">security</span>
+            </div>
+            <h3>ATEX Zone 2 Intrinsically Safe</h3>
+            <p>
+              Conformal coated electronics sealed in IP65 splash-proof ABS flame-retardant housing designed strictly for non-sparking operation in LPG vapor environments.
+            </p>
+            <span class="feature-spec-tag">
+              <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+              Certified Intrinsically Safe
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: INTERACTIVE REFILL & FUEL SAVINGS CALCULATOR
+         ========================================================================== -->
+    <section class="section" id="roi-calc">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Empirical Return on Investment</div>
+          <h2 class="section-title">Calculate Your Annual Fuel &amp; Downtime Savings</h2>
+          <p class="section-subtitle">
+            Most kitchens return cylinders with 0.8 kg to 1.5 kg of unburnt residual gas out of fear of running out mid-recipe. See how much you save with FuelSense.
+          </p>
+        </div>
+
+        <div class="roi-card">
+          
+          <!-- Inputs Column -->
+          <div class="roi-inputs">
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <label for="roiCylinders">Cylinders Used Per Month:</label>
+                <span class="font-mono text-primary font-bold"><span id="roiCylindersVal">3</span> Tanks</span>
+              </div>
+              <input type="range" class="sim-slider" id="roiCylinders" min="1" max="30" step="1" value="3"/>
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <label for="roiResidual">Estimated Gas Left in Returned Tanks:</label>
+                <span class="font-mono text-primary font-bold"><span id="roiResidualVal">0.9</span> kg</span>
+              </div>
+              <input type="range" class="sim-slider" id="roiResidual" min="0.2" max="2.5" step="0.1" value="0.9"/>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--on-surface-variant); line-height: 1.5;">
+              Based on standard domestic LPG benchmark (₹75/kg) plus average emergency delivery surcharge fee avoidance.
+            </p>
+          </div>
+
+          <!-- Results Card -->
+          <div class="roi-results-box">
+            <div class="roi-big-stat">
+              <span class="font-mono text-dim" style="font-size: 0.8rem; text-transform: uppercase;">Estimated Annual Savings</span>
+              <span class="roi-big-number" id="roiAnnualSavings">₹4,680</span>
+            </div>
+
+            <div>
+              <div class="roi-breakdown-row">
+                <span>Unburnt Wasted Gas Prevented:</span>
+                <strong class="text-primary-fixed" id="roiWastedFuel">32 kg/year</strong>
+              </div>
+              <div class="roi-breakdown-row">
+                <span>Emergency Outages Avoided:</span>
+                <strong class="text-primary-fixed" id="roiDisruptionsPrevented">11 Outages</strong>
+              </div>
+              <div class="roi-breakdown-row">
+                <span>Payback Period on Hardware:</span>
+                <strong style="color: #ffffff;">~6.4 Months</strong>
+              </div>
+            </div>
+
+            <button class="btn btn-amber" style="width: 100%;" data-open-order>
+              <span>Get FuelSense Kit Now</span>
+              <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 8: PRICING & HARDWARE KIT SHOWCASE
+         ========================================================================== -->
+    <section class="section section-dark" id="pricing">
+      <div class="hero-glow-1"></div>
+      <div class="container" style="position: relative; z-index: 10;">
+        
+        <div class="section-header">
+          <div class="section-tag dark">Ready For Complete Fuel Peace</div>
+          <h2 class="section-title">Never Guess Your LPG Level Again</h2>
+          <p class="section-subtitle">
+            Equip your kitchen with industrial-grade precision monitoring. Fully assembled, factory-calibrated, and ready to plug in.
+          </p>
+        </div>
+
+        <div class="pricing-wrapper">
+          <div class="pricing-card-hero">
+            <span class="pricing-badge-center">Complete Hardware Kit</span>
+            
+            <div class="price-headline">
+              <div class="price-row">
+                <span class="price-val">₹2,499</span>
+                <span class="price-sub">/ one-time device</span>
+              </div>
+              <span class="font-mono text-muted" style="font-size: 0.8rem;">
+                Zero Monthly Subscription • Lifetime Cloud &amp; WhatsApp Alerts
+              </span>
+            </div>
+
+            <!-- Features Checklist -->
+            <ul class="pricing-checklist">
+              <li class="checklist-item">
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Heavy-gauge corrosion-resistant steel weighing plate &amp; 100 kg rated strain load cell</span>
+              </li>
+              <li class="checklist-item">
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Integrated high-contrast OLED display &amp; animated LED perimeter status ring</span>
+              </li>
+              <li class="checklist-item">
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Intelligent early depletion buzzer &amp; automated WhatsApp / SMS dispatch gateway</span>
+              </li>
+              <li class="checklist-item">
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Factory pre-calibrated for all Indian 14.2 kg &amp; 19 kg LPG cylinder brands</span>
+              </li>
+              <li class="checklist-item">
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Braided USB-C power cable, power adapter, and 14-month backup LiFePO4 battery pack</span>
+              </li>
+              <li class="checklist-item">
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>1-Year replacement warranty with express door-step replacement</span>
+              </li>
+            </ul>
+
+            <div class="pricing-actions">
+              <button class="btn btn-primary btn-lg" data-open-order>
+                <span>Order FuelSense Hardware Kit</span>
+                <span class="material-symbols-outlined" style="font-size: 18px;">shopping_bag</span>
+              </button>
+              <button class="btn btn-outline" data-open-commercial>
+                <span>Request Commercial Kitchen Consultation</span>
+              </button>
+            </div>
+
+            <div style="text-align: center; margin-top: 1.5rem; font-size: 0.8rem; color: var(--on-surface-variant);">
+              30-Day Money-Back Guarantee • Free Express Delivery Across India
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 9: TECHNICAL SPECIFICATIONS & FAQ ACCORDION
+         ========================================================================== -->
+    <section class="section" id="specs">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">Engineering Specifications</div>
+          <h2 class="section-title">Frequently Asked Questions &amp; Technical Specs</h2>
+          <p class="section-subtitle">
+            Everything you need to know about installation, safety certifications, and accuracy.
+          </p>
+        </div>
+
+        <div class="specs-accordion">
+          
+          <div class="accordion-item open">
+            <button class="accordion-btn">
+              <span>How does FuelSense isolate the gas weight from the heavy steel cylinder?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="accordion-body">
+              Every LPG cylinder manufactured in India is legally stamped with its exact empty vessel tare weight (typically between 15.1 kg and 15.8 kg). During initial setup, FuelSense's calibration engine records this value. The device continuously subtracts the vessel tare weight from the total gross measurement, yielding pure combustible gas mass with sub-gram resolution.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-btn">
+              <span>Is FuelSense safe to keep near an LPG cylinder inside a kitchen cabinet?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="accordion-body">
+              Yes, absolutely. FuelSense is engineered with ATEX Zone 2 intrinsically safe low-power architecture. Operating voltages are regulated to 3.3V with current-limiting safety fuses and anti-static conformal coating that eliminates any electrostatic discharge or spark hazard.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-btn">
+              <span>What happens if my Wi-Fi goes down or during a power outage?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="accordion-body">
+              FuelSense contains an internal LiFePO4 battery pack that maintains continuous sensing for up to 14 months without mains power. The on-device high-contrast OLED display and acoustic warning buzzer remain fully functional offline. Once Wi-Fi reconnects, all historical telemetry logs automatically back-sync to the cloud.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-btn">
+              <span>Can I use FuelSense for commercial 19 kg or 47.5 kg jumbo cylinders?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="accordion-body">
+              Yes. The industrial load cell has a rated capacity of 100 kg with 150% safe overload margin. The companion firmware provides preset tare and capacity profiles for 14.2 kg domestic cylinders, 19 kg commercial cylinders, and 47.5 kg industrial manifold cylinders.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-btn">
+              <span>Are there any recurring monthly subscription fees?</span>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="accordion-body">
+              No. The ₹2,499 purchase is a one-time hardware fee. Cloud telemetry synchronization, automated WhatsApp notifications, and firmware updates over-the-air are included free for the lifetime of your device.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       SITE FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <!-- Col 1: Brand & Mission -->
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <a href="#" class="logo-brand">
+            <div class="logo-icon-wrap">
+              <span class="material-symbols-outlined" style="font-size: 22px;">sensors</span>
+            </div>
+            <span class="logo-text">FuelSense</span>
+          </a>
+          <p style="font-size: 0.875rem; color: var(--surface-container-high); line-height: 1.6; max-width: 320px;">
+            Smart LPG cylinder monitoring and predictive depletion telemetry. Industrial precision instrumentation with residential peace of mind.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--primary-fixed);">
+            DESIGNED &amp; ENGINEERED IN BENGALURU, INDIA
+          </div>
+        </div>
+
+        <!-- Col 2: Platform -->
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul class="footer-links">
+            <li><a href="#how-it-works">Hardware Sensing</a></li>
+            <li><a href="#live-demo">Live Telemetry Console</a></li>
+            <li><a href="#commercial">Commercial Manifolds</a></li>
+            <li><a href="#roi-calc">Depletion Modeling</a></li>
+            <li><a href="#features">Industrial Specifications</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Specifications -->
+        <div class="footer-col">
+          <h4>Compliance</h4>
+          <ul class="footer-links">
+            <li><a href="#">ATEX Zone 2 Non-Sparking</a></li>
+            <li><a href="#">RoHS &amp; CE Certified</a></li>
+            <li><a href="#">BIS Quality Compliance</a></li>
+            <li><a href="#">REST Webhook API</a></li>
+            <li><a href="#">Safety Whitepaper</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Support & Hub -->
+        <div class="footer-col">
+          <h4>Support &amp; R&amp;D Hub</h4>
+          <ul class="footer-links" style="font-size: 0.85rem;">
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="material-symbols-outlined" style="color: var(--primary); font-size: 18px;">mail</span>
+              <a href="mailto:support@fuelsense.io">support@fuelsense.io</a>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="material-symbols-outlined" style="color: var(--primary); font-size: 18px;">call</span>
+              <a href="tel:+919876543210">+91 98765 43210</a>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 0.5rem;">
+              <span class="material-symbols-outlined" style="color: var(--primary); font-size: 18px; margin-top: 2px;">location_on</span>
+              <span>Hardware Innovation Park, Electronics City, Bengaluru, Karnataka 560100</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 FuelSense Technologies Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+          <a href="#" style="color: inherit; text-decoration: none;">Terms of Service</a>
+          <a href="#" style="color: inherit; text-decoration: none;">Hardware Warranty</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODALS: ORDER HARDWARE KIT & COMMERCIAL TRIAL
+       ========================================================================== -->
+  
+  <!-- Order Hardware Kit Modal -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" aria-label="Close modal">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <div class="logo-icon-wrap" style="width: 32px; height: 32px;">
+          <span class="material-symbols-outlined" style="font-size: 18px;">shopping_cart</span>
+        </div>
+        <h3 style="font-size: 1.35rem;">Order FuelSense Hardware Kit</h3>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--on-surface-variant);">
+        Complete plug-and-play IoT load scale with OLED gateway and lifetime WhatsApp alerts.
+      </p>
+
+      <form class="modal-form" id="orderForm">
+        <div class="form-group">
+          <label for="orderName">Full Name</label>
+          <input type="text" class="form-input" id="orderName" placeholder="e.g. Ramesh Patel" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="orderPhone">WhatsApp Mobile Number (for depletion alerts)</label>
+          <input type="tel" class="form-input" id="orderPhone" placeholder="+91 98765 43210" required/>
+        </div>
+
+        <div class="inputs-row">
+          <div class="form-group">
+            <label for="orderCity">City</label>
+            <input type="text" class="form-input" id="orderCity" placeholder="Bengaluru" required/>
+          </div>
+          <div class="form-group">
+            <label for="orderQty">Quantity</label>
+            <select class="form-input" id="orderQty">
+              <option value="1">1 Unit (₹2,499)</option>
+              <option value="2">2 Units (₹4,998)</option>
+              <option value="3">3 Units (₹7,497)</option>
+              <option value="4">4 Units (₹9,996)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="orderCylinderBrand">Gas Provider Brand</label>
+          <select class="form-input" id="orderCylinderBrand">
+            <option>Indane Gas (Indian Oil)</option>
+            <option>HP Gas (Hindustan Petroleum)</option>
+            <option>Bharat Gas (BPCL)</option>
+            <option>Commercial 19kg / Manifold</option>
+          </select>
+        </div>
+
+        <div style="background: var(--surface-container-low); padding: 0.85rem 1rem; border-radius: var(--rounded); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.85rem;">
+          <span>Total (Incl. Taxes &amp; Free Express Delivery):</span>
+          <strong class="text-primary" style="font-size: 1.15rem;">₹2,499</strong>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+          <button type="button" class="btn btn-outline modal-cancel" style="flex: 1;">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="flex: 2;">Confirm Hardware Booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Commercial Consultation Modal -->
+  <div class="modal-overlay" id="commercialModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" aria-label="Close modal">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <div class="logo-icon-wrap" style="width: 32px; height: 32px;">
+          <span class="material-symbols-outlined" style="font-size: 18px;">corporate_fare</span>
+        </div>
+        <h3 style="font-size: 1.35rem;">Commercial Kitchen Trial</h3>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--on-surface-variant);">
+        Schedule a multi-manifold telemetry deployment for your restaurant, hostel, or commercial canteen.
+      </p>
+
+      <form class="modal-form" id="commercialForm">
+        <div class="form-group">
+          <label for="commFacility">Facility or Restaurant Name</label>
+          <input type="text" class="form-input" id="commFacility" placeholder="e.g. Royal Orchid Cloud Kitchens" required/>
+        </div>
+
+        <div class="inputs-row">
+          <div class="form-group">
+            <label for="commContact">Contact Person</label>
+            <input type="text" class="form-input" id="commContact" placeholder="Executive Chef / Manager" required/>
+          </div>
+          <div class="form-group">
+            <label for="commPhone">Phone Number</label>
+            <input type="tel" class="form-input" id="commPhone" placeholder="+91 98765 43210" required/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="commScale">Estimated Gas Manifold Capacity</label>
+          <select class="form-input" id="commScale">
+            <option>4-6 Cylinders (Single Line Manifold)</option>
+            <option>8-16 Cylinders (Dual Bank Auto-Switchover)</option>
+            <option>20+ Cylinders (Central Hotel Facility / Boiler)</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+          <button type="button" class="btn btn-outline modal-cancel" style="flex: 1;">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="flex: 2;">Request Site Inspection</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>

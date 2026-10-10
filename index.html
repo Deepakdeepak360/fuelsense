@@ -59,14 +59,86 @@
         </button>
 
         <!-- Primary CTA -->
-        <a href="#pricing" class="btn btn-primary btn-sm" data-open-order>
+        <a href="#pricing" class="btn btn-primary btn-sm nav-cta-btn" data-open-order>
           <span>Get FuelSense</span>
           <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
         </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="material-symbols-outlined" id="mobileNavToggleIcon">menu</span>
+        </button>
       </div>
 
     </div>
   </header>
+
+  <!-- ==========================================================================
+       MOBILE NAVIGATION DRAWER & BACKDROP OVERLAY
+       ========================================================================== -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+  <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="mobile-drawer-header">
+      <a href="#" class="logo-brand mobile-drawer-logo">
+        <div class="logo-icon-wrap">
+          <span class="material-symbols-outlined" style="font-size: 20px;">sensors</span>
+        </div>
+        <div>
+          <span class="logo-text">FuelSense</span>
+          <span class="logo-badge">IoT</span>
+        </div>
+      </a>
+      <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close menu">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <div class="mobile-drawer-status">
+      <span class="telemetry-dot"></span>
+      <span class="font-mono" style="font-size: 0.72rem; color: var(--primary-fixed);">CLOUD SYNC: 100% OPERATIONAL</span>
+    </div>
+
+    <nav class="mobile-drawer-nav">
+      <a href="#how-it-works" class="mobile-nav-link">
+        <span class="material-symbols-outlined">precision_manufacturing</span>
+        <span>How It Works</span>
+      </a>
+      <a href="#live-demo" class="mobile-nav-link">
+        <span class="material-symbols-outlined">vital_signs</span>
+        <span>Live Monitor</span>
+      </a>
+      <a href="#commercial" class="mobile-nav-link">
+        <span class="material-symbols-outlined">corporate_fare</span>
+        <span>Commercial Scale</span>
+      </a>
+      <a href="#features" class="mobile-nav-link">
+        <span class="material-symbols-outlined">verified</span>
+        <span>Capabilities</span>
+      </a>
+      <a href="#roi-calc" class="mobile-nav-link">
+        <span class="material-symbols-outlined">calculate</span>
+        <span>Savings Calculator</span>
+      </a>
+      <a href="#pricing" class="mobile-nav-link">
+        <span class="material-symbols-outlined">shopping_cart</span>
+        <span>Hardware Kit</span>
+      </a>
+      <a href="#specs" class="mobile-nav-link">
+        <span class="material-symbols-outlined">help</span>
+        <span>Specifications &amp; FAQ</span>
+      </a>
+    </nav>
+
+    <div class="mobile-drawer-actions">
+      <a href="#pricing" class="btn btn-primary" style="width: 100%;" data-open-order>
+        <span>Get FuelSense Kit (₹2,499)</span>
+        <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+      </a>
+      <button class="btn btn-outline" style="width: 100%; margin-top: 0.75rem;" data-open-commercial>
+        <span>Commercial Consultation</span>
+      </button>
+    </div>
+  </aside>
 
   <main>
     <!-- ==========================================================================
@@ -746,7 +818,7 @@
             </p>
           </div>
 
-          <div style="display: flex; gap: 0.75rem;">
+          <div class="manifold-actions" style="display: flex; gap: 0.75rem;">
             <button class="btn btn-outline" id="switchManifoldBtn">
               <span class="material-symbols-outlined" style="font-size: 18px;">alt_route</span>
               <span>Auto-Switch Manifold Valve</span>
@@ -1270,7 +1342,7 @@
 
       <div class="footer-bottom">
         <div>&copy; 2026 FuelSense Technologies Inc. All rights reserved.</div>
-        <div style="display: flex; gap: 1.5rem;">
+        <div class="footer-bottom-links" style="display: flex; gap: 1.5rem;">
           <a href="#" style="color: inherit; text-decoration: none;">Privacy Policy</a>
           <a href="#" style="color: inherit; text-decoration: none;">Terms of Service</a>
           <a href="#" style="color: inherit; text-decoration: none;">Hardware Warranty</a>
@@ -1343,7 +1415,7 @@
           <strong class="text-primary" style="font-size: 1.15rem;">₹2,499</strong>
         </div>
 
-        <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+        <div class="modal-actions" style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
           <button type="button" class="btn btn-outline modal-cancel" style="flex: 1;">Cancel</button>
           <button type="submit" class="btn btn-primary" style="flex: 2;">Confirm Hardware Booking</button>
         </div>
@@ -1394,7 +1466,7 @@
           </select>
         </div>
 
-        <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+        <div class="modal-actions" style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
           <button type="button" class="btn btn-outline modal-cancel" style="flex: 1;">Cancel</button>
           <button type="submit" class="btn btn-primary" style="flex: 2;">Request Site Inspection</button>
         </div>

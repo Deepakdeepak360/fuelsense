@@ -539,6 +539,71 @@
     });
   }
 
+  // ==========================================================================
+  // MOBILE NAVIGATION DRAWER
+  // ==========================================================================
+  const mobileNavToggle = document.getElementById('mobileNavToggle');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const mobileDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+  const mobileDrawerClose = document.getElementById('mobileDrawerClose');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  function openMobileDrawer() {
+    if (mobileDrawer && mobileDrawerOverlay) {
+      mobileDrawer.classList.add('active');
+      mobileDrawerOverlay.classList.add('active');
+      mobileDrawer.setAttribute('aria-hidden', 'false');
+      if (mobileNavToggle) mobileNavToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      playTone(480, 0.06, 'sine');
+    }
+  }
+
+  function closeMobileDrawer() {
+    if (mobileDrawer && mobileDrawerOverlay) {
+      mobileDrawer.classList.remove('active');
+      mobileDrawerOverlay.classList.remove('active');
+      mobileDrawer.setAttribute('aria-hidden', 'true');
+      if (mobileNavToggle) mobileNavToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (mobileNavToggle) {
+    mobileNavToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = mobileDrawer && mobileDrawer.classList.contains('active');
+      if (isOpen) {
+        closeMobileDrawer();
+      } else {
+        openMobileDrawer();
+      }
+    });
+  }
+
+  if (mobileDrawerClose) {
+    mobileDrawerClose.addEventListener('click', closeMobileDrawer);
+  }
+
+  if (mobileDrawerOverlay) {
+    mobileDrawerOverlay.addEventListener('click', closeMobileDrawer);
+  }
+
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      closeMobileDrawer();
+    });
+  });
+
+  // Close drawer or modals on Escape
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeMobileDrawer();
+      if (orderModal) orderModal.classList.remove('active');
+      if (commercialModal) commercialModal.classList.remove('active');
+    }
+  });
+
   // Initialize Default State
   updateSimulation(2.1, false);
   calculateRoi();

@@ -141,6 +141,10 @@ body {
   position: relative;
 }
 
+section[id] {
+  scroll-margin-top: 80px;
+}
+
 .section-dark {
   background-color: var(--secondary);
   color: #ffffff;
@@ -377,11 +381,22 @@ h1, h2, h3, h4 {
 /* Mobile Menu Toggle */
 .mobile-toggle {
   display: none;
-  background: transparent;
-  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--rounded);
   cursor: pointer;
-  font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.mobile-toggle:hover {
+  background: rgba(19, 171, 158, 0.2);
+  color: var(--primary-fixed);
+  border-color: rgba(19, 171, 158, 0.4);
 }
 
 /* ==========================================================================
@@ -1280,11 +1295,13 @@ h1, h2, h3, h4 {
   border-radius: var(--rounded-full);
   outline: none;
   -webkit-appearance: none;
+  appearance: none;
   cursor: pointer;
 }
 
 .sim-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   width: 22px;
   height: 22px;
   border-radius: 50%;
@@ -1295,7 +1312,19 @@ h1, h2, h3, h4 {
   transition: transform 0.15s ease;
 }
 
-.sim-slider::-webkit-slider-thumb:hover {
+.sim-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(19, 171, 158, 0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.sim-slider::-webkit-slider-thumb:hover,
+.sim-slider::-moz-range-thumb:hover {
   transform: scale(1.15);
 }
 
@@ -2026,8 +2055,136 @@ h1, h2, h3, h4 {
 }
 
 /* ==========================================================================
+   MOBILE NAVIGATION DRAWER & BACKDROP OVERLAY
+   ========================================================================== */
+.mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 17, 22, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1098;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.mobile-drawer-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 86vw);
+  background: #082129;
+  background: linear-gradient(180deg, #0b2f3a 0%, #06191f 100%);
+  border-left: 1px solid rgba(19, 171, 158, 0.3);
+  box-shadow: -12px 0 36px rgba(0, 0, 0, 0.65);
+  z-index: 1099;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-drawer.active {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(19, 171, 158, 0.2);
+}
+
+.mobile-drawer-close {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--rounded);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mobile-drawer-close:hover {
+  background: rgba(186, 26, 26, 0.25);
+  color: #ffdad6;
+  border-color: rgba(186, 26, 26, 0.4);
+}
+
+.mobile-drawer-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(19, 171, 158, 0.12);
+  border: 1px solid rgba(19, 171, 158, 0.25);
+  border-radius: var(--rounded-md);
+}
+
+.mobile-drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--rounded-md);
+  color: var(--surface-container-high);
+  text-decoration: none;
+  font-size: 0.925rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-link .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 1.25rem;
+  transition: transform var(--transition-fast);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:active {
+  background: rgba(19, 171, 158, 0.15);
+  color: var(--primary-fixed);
+}
+
+.mobile-nav-link:hover .material-symbols-outlined {
+  transform: translateX(3px);
+}
+
+.mobile-drawer-actions {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(19, 171, 158, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */
+
+/* Tablet & Smaller Desktops (<= 1024px) */
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -2054,48 +2211,576 @@ h1, h2, h3, h4 {
   }
 }
 
+/* Standard Tablets & Large Phones (<= 768px) */
 @media (max-width: 768px) {
-  .nav-links, .telemetry-indicator {
-    display: none;
+  :root {
+    --gutter: 1.25rem;
   }
+
+  .site-header {
+    height: 70px;
+  }
+
+  .nav-wrapper {
+    gap: 0.75rem;
+  }
+
+  .nav-links,
+  .telemetry-indicator {
+    display: none !important;
+  }
+
   .mobile-toggle {
-    display: block;
+    display: flex;
   }
+
+  .section {
+    padding: 3.5rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .section-title {
+    font-size: 1.95rem;
+  }
+
+  .hero-section {
+    padding-top: 6.75rem;
+    padding-bottom: 3.5rem;
+  }
+
   .hero-title {
     font-size: 2.5rem;
   }
+
+  .hero-visual-wrapper {
+    min-height: auto;
+  }
+
+  .hero-product-img {
+    height: 340px;
+  }
+
+  .hero-floating-hud {
+    padding: 1rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .hud-metric-number {
+    font-size: 1.85rem;
+  }
+
   .comparison-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
+
+  .compare-card {
+    padding: 1.75rem 1.35rem;
+  }
+
   .arch-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
+
   .formula-box {
     grid-template-columns: 1fr;
+    padding: 1.5rem 1.25rem;
+    gap: 1.5rem;
   }
+
   .telemetry-stage {
     grid-template-columns: 1fr;
     text-align: center;
+    padding: 1.5rem 1.25rem;
+    gap: 1.5rem;
   }
+
   .cylinder-visualizer-container {
     margin: 0 auto;
   }
+
   .weight-big {
     justify-content: center;
+    font-size: 3rem;
   }
+
   .telemetry-quad {
     grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
   }
-  .manifold-grid {
-    grid-template-columns: 1fr;
+
+  .demo-console {
+    padding: 1.65rem 1.25rem;
+    gap: 1.35rem;
   }
-  .features-grid {
-    grid-template-columns: 1fr;
+
+  .controls-panel {
+    padding: 1.35rem 1.15rem;
   }
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
+
   .inputs-row {
     grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .demo-sidebar {
+    gap: 1.25rem;
+  }
+
+  .alert-mockup-card,
+  .ml-prediction-card,
+  .diag-card {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .manifold-toolbar {
+    margin-bottom: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .manifold-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .feature-tile {
+    padding: 1.65rem 1.35rem;
+  }
+
+  .roi-card {
+    padding: 1.75rem 1.35rem;
+    gap: 1.75rem;
+  }
+
+  .pricing-card-hero {
+    padding: 2.25rem 1.5rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .modal-box {
+    padding: 1.75rem 1.35rem;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Medium Mobile Devices (<= 640px) */
+@media (max-width: 640px) {
+  /* Architecture cards become a clean single-column sequence on phones */
+  .arch-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .formula-specs {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  /* Commercial manifold action buttons stack neatly */
+  .manifold-actions {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 0.6rem !important;
+  }
+
+  .manifold-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Footer bottom centered alignment */
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-bottom-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem !important;
+  }
+
+  /* Interactive simulator controls stacking */
+  .controls-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    text-align: left;
+  }
+
+  #resetDemoBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .presets-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.45rem;
+  }
+
+  .preset-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.55rem;
+    font-size: 0.8rem;
+  }
+
+  #autoBurnBtn {
+    width: 100%;
+    margin-left: 0 !important;
+    justify-content: center;
+  }
+}
+
+/* Compact Mobile Phones (<= 480px) */
+@media (max-width: 480px) {
+  :root {
+    --gutter: 1rem;
+  }
+
+  .site-header {
+    height: 66px;
+  }
+
+  /* Hide header CTA on compact screens to give priority to logo and toggle */
+  .nav-cta-btn {
+    display: none !important;
+  }
+
+  .section {
+    padding: 2.75rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .section-title {
+    font-size: 1.65rem;
+    line-height: 1.25;
+  }
+
+  .section-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .hero-section {
+    padding-top: 5.75rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.15rem;
+    line-height: 1.15;
+  }
+
+  .hero-lead {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-trust-bar {
+    gap: 0.75rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .hero-product-img {
+    height: 280px;
+  }
+
+  .hero-floating-hud {
+    bottom: 0.65rem;
+    left: 0.65rem;
+    right: 0.65rem;
+    padding: 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .hud-metric-number {
+    font-size: 1.65rem;
+  }
+
+  .hud-device-id {
+    font-size: 0.68rem;
+  }
+
+  /* Comparison Cards */
+  .compare-card {
+    padding: 1.35rem 1rem;
+  }
+
+  .compare-badge {
+    position: static;
+    margin-bottom: 0.75rem;
+    align-self: flex-start;
+  }
+
+  .compare-header {
+    margin-bottom: 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .compare-icon-box {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+  }
+
+  .step-row {
+    padding: 0.75rem;
+    gap: 0.65rem;
+  }
+
+  .step-text h4 {
+    font-size: 0.88rem;
+  }
+
+  .step-text p {
+    font-size: 0.8rem;
+  }
+
+  /* Hardware Architecture */
+  .arch-card {
+    padding: 1.25rem 1rem;
+    gap: 0.85rem;
+  }
+
+  .formula-box {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .formula-display-dark {
+    padding: 1rem 0.75rem;
+  }
+
+  .eq-pill {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .eq-operator {
+    font-size: 1.1rem;
+  }
+
+  /* Interactive Console */
+  .console-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .console-badges {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .weight-big {
+    font-size: 2.4rem;
+  }
+
+  .weight-big span {
+    font-size: 1.15rem;
+  }
+
+  .fill-ratio-header {
+    font-size: 0.78rem;
+  }
+
+  .progress-ticks {
+    font-size: 0.65rem;
+  }
+
+  .telemetry-quad {
+    gap: 0.5rem;
+  }
+
+  .quad-item {
+    padding: 0.75rem 0.35rem;
+  }
+
+  .quad-value {
+    font-size: 1.1rem;
+  }
+
+  .quad-label {
+    font-size: 0.65rem;
+  }
+
+  /* Manifold */
+  .manifold-station-card {
+    padding: 1.35rem 1rem;
+    gap: 1rem;
+  }
+
+  .station-name {
+    font-size: 1rem;
+  }
+
+  .station-level-val {
+    font-size: 1.5rem;
+  }
+
+  .station-badge-top {
+    right: 0.75rem;
+    font-size: 0.6rem;
+    padding: 0.15rem 0.45rem;
+  }
+
+  /* ROI Calculator */
+  .roi-card {
+    padding: 1.35rem 1rem;
+  }
+
+  .roi-results-box {
+    padding: 1.25rem 1rem;
+  }
+
+  .roi-big-number {
+    font-size: 2.15rem;
+  }
+
+  .roi-breakdown-row {
+    font-size: 0.78rem;
+    gap: 0.5rem;
+  }
+
+  /* Pricing */
+  .pricing-card-hero {
+    padding: 1.75rem 1rem;
+  }
+
+  .pricing-badge-center {
+    font-size: 0.68rem;
+    padding: 0.3rem 0.75rem;
+    top: -12px;
+  }
+
+  .price-val {
+    font-size: 2.6rem;
+  }
+
+  .pricing-checklist {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .checklist-item {
+    font-size: 0.825rem;
+    line-height: 1.45;
+    gap: 0.6rem;
+  }
+
+  .pricing-actions .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Accordion */
+  .accordion-btn {
+    padding: 1rem 0.85rem;
+    font-size: 0.92rem;
+    gap: 0.5rem;
+  }
+
+  .accordion-body {
+    padding: 0 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .accordion-item.open .accordion-body {
+    max-height: 800px;
+    padding-bottom: 1.25rem;
+  }
+
+  /* Modals */
+  .modal-overlay {
+    padding: 0.75rem;
+  }
+
+  .modal-box {
+    padding: 1.35rem 1rem;
+    border-radius: var(--rounded-lg);
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse !important;
+    width: 100%;
+    gap: 0.6rem !important;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Extra-Narrow Screens (<= 380px) */
+@media (max-width: 380px) {
+  .logo-text {
+    font-size: 1.1rem;
+  }
+
+  .logo-badge {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .price-val {
+    font-size: 2.25rem;
+  }
+
+  .roi-big-number {
+    font-size: 1.95rem;
+  }
+
+  .diag-row {
+    font-size: 0.72rem;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+  }
+
+  .ml-days-big {
+    font-size: 1.4rem;
   }
 }

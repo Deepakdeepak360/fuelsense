@@ -95,6 +95,9 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -103,6 +106,8 @@ body {
   color: var(--on-surface);
   line-height: 1.5;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 /* Custom Scrollbar */
@@ -1133,6 +1138,7 @@ h1, h2, h3, h4 {
 .flame-simulation {
   position: absolute;
   top: -30px;
+  left: calc(50% - 8px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1911,9 +1917,11 @@ h1, h2, h3, h4 {
   backdrop-filter: blur(8px);
   z-index: 2000;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-normal);
@@ -1933,6 +1941,9 @@ h1, h2, h3, h4 {
   box-shadow: var(--shadow-dark);
   border: 1px solid var(--border-hairline);
   position: relative;
+  margin: auto;
+  max-height: calc(100dvh - 3rem);
+  overflow-y: auto;
   transform: scale(0.95);
   transition: transform var(--transition-normal);
 }
@@ -2390,10 +2401,28 @@ h1, h2, h3, h4 {
     gap: 0.85rem;
   }
 
+  .hero-trust-bar {
+    justify-content: center;
+    text-align: center;
+    gap: 0.75rem 1.25rem;
+  }
+
   .formula-specs {
     flex-direction: column;
     gap: 0.5rem;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+
+  .equation-flow {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .eq-pill {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
   }
 
   /* Commercial manifold action buttons stack neatly */
